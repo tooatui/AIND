@@ -1,6 +1,5 @@
 https://classroom.udacity.com/nanodegrees/nd889/parts/6be67fd1-9725-4d14-b36e-ae2b5b20804c/modules/f719d723-7ee0-472c-80c1-663f02de94f3/lessons/9b1a742a-fa2d-4940-922c-ed426b44f81b/concepts/49c5de60-40b7-4863-bf5d-dfc2f781a055
 The following was my initial solution which didn't pass all tests after submission.
-Something's wrong with the get_legal_moves function
 
 ```python
 import copy
@@ -109,3 +108,6 @@ class GameState:
                     
         return new_game_state
 ```  
+
+## Something's wrong with the get_legal_moves function
+- The logic is not right. The active player can move to any open cell diagonal from the current position given no blocker on the way. What I implented was the player can only move to the diagonal one step away. 
