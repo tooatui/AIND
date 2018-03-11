@@ -181,4 +181,31 @@ def get_legal_moves(self):
 ```
 
 ## Final solution:
+Let the current play move along the 8 possible directions and add the open position to list until a blocker is reached.
 
+```
+    def get_legal_moves(self):
+        list_to_return = []
+        current_player_location = self._player_locations[0] if self._parity == 0 else self._player_locations[1]
+        
+        if current_player_location is None:
+	        for i, cells in enumerate(self._board):
+	            for j, cell in enumerate(cells):
+	            	if self._board[i][j] == 0:
+	            		list_to_return.append((i, j))
+	        return list_to_return
+	        
+        # the player is able to move 8 directions
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, -1), (1, -1), (-1, 1)]
+        for direction in directions:
+            next_position = (current_player_location[0] + direction[0], current_player_location[1] + direction[1])
+            while next_position[0] < xlim and next_position[0] > -1 and next_position[1] < ylim and next_position[1] > -1:
+                print(next_position)
+                if self._board[next_position[0]][next_position[1]] == 0:
+                    list_to_return.append(next_position)
+                    next_position = (next_position[0] + direction[0], next_position[1] + direction[1])
+                else:
+                    break
+       
+        return list_to_return
+```
