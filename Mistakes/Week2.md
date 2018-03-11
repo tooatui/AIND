@@ -112,12 +112,34 @@ class GameState:
 ## Something's wrong with the get_legal_moves function
 - The result is wrong for the following test
 ```
-	Applying move (0, 0) for player 1...
-	Applying move (1, 1) for player 2...
-	Round 2: Getting legal moves for player 1...
-	[]
+print("Creating empty game board...")
+g = GameState()
+
+print("Getting legal moves for player 1...")
+p1_empty_moves = g.get_legal_moves()
+print("Found {} legal moves.".format(len(p1_empty_moves or [])))
+
+print("Applying move (0, 0) for player 1...")
+g1 = g.forecast_move((0, 0))
+
+print("Getting legal moves for player 2...")
+p2_empty_moves = g1.get_legal_moves()
+
+print("Applying move (1, 1) for player 2...")
+g2 = g1.forecast_move((1, 1))
+
+print("Round 2: Getting legal moves for player 1...")
+p1_empty_moves_2 = g2.get_legal_moves()
+
+print(p1_empty_moves_2)
+
+# output
+# Applying move (0, 0) for player 1...
+# Applying move (1, 1) for player 2...
+# Round 2: Getting legal moves for player 1...
+# []
 ```
-The correct result for player 1 is [(0, 1),(1, 0), (2, 0)]
+The correct result for player 1 (the last output) should be [(0, 1),(1, 0), (2, 0)]
 - The logic is not right. The active player can move to any open cell diagonal from the current position given no blocker on the way. What I implented was the player can only move to the diagonal one step away. 
 
 ## First solution
