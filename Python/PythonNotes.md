@@ -87,6 +87,13 @@ n,box_min_pos = min((len(values[s]), s) for s in boxes if len(values[s]) > 1)
 # python can do multiple logic operation in one statement
 `if 0 <= _x + dx < xlim`
 
+# tuple operation
+```
+a = (0 ,1)
+x, y =a
+print (x, y)
+# 0 1
+```
 # Others
 ```
 xlim = 3
