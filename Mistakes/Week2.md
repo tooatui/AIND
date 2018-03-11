@@ -2,7 +2,7 @@ https://classroom.udacity.com/nanodegrees/nd889/parts/6be67fd1-9725-4d14-b36e-ae
 The following was my initial solution which didn't pass all tests after submission.
 Something's wrong with the get_legal_moves function
 
-```
+```python
 import copy
 
 xlim, ylim = 3, 2  # board dimension constants
