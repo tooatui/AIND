@@ -89,8 +89,8 @@ n,box_min_pos = min((len(values[s]), s) for s in boxes if len(values[s]) > 1)
 
 # tuple operation
 ```
-a = (0 ,1)
-x, y =a
+t = (0 ,1)
+x, y = t
 print (x, y)
 # 0 1
 ```
