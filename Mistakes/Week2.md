@@ -110,4 +110,12 @@ class GameState:
 ```  
 
 ## Something's wrong with the get_legal_moves function
+- The result is wrong for the following test
+```
+	Applying move (0, 0) for player 1...
+	Applying move (1, 1) for player 2...
+	Round 2: Getting legal moves for player 1...
+	[]
+```
+The correct result for player 1 is [(0, 1),(1, 0), (2, 0)]
 - The logic is not right. The active player can move to any open cell diagonal from the current position given no blocker on the way. What I implented was the player can only move to the diagonal one step away. 
