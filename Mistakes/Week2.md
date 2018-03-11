@@ -1,4 +1,5 @@
 https://classroom.udacity.com/nanodegrees/nd889/parts/6be67fd1-9725-4d14-b36e-ae2b5b20804c/modules/f719d723-7ee0-472c-80c1-663f02de94f3/lessons/9b1a742a-fa2d-4940-922c-ed426b44f81b/concepts/49c5de60-40b7-4863-bf5d-dfc2f781a055
+
 The following was my initial solution which didn't pass all tests after submission.
 
 ```python
@@ -181,7 +182,7 @@ def get_legal_moves(self):
 ```
 
 ## Final solution:
-Let the current play move along the 8 possible directions and add the open position to list until a blocker is reached.
+Let the current player move along the 8 possible directions and add the open position to list until a blocker is reached.
 
 ```
     def get_legal_moves(self):
