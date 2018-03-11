@@ -119,3 +119,44 @@ class GameState:
 ```
 The correct result for player 1 is [(0, 1),(1, 0), (2, 0)]
 - The logic is not right. The active player can move to any open cell diagonal from the current position given no blocker on the way. What I implented was the player can only move to the diagonal one step away. 
+
+## First solution
+The following code sovle the above mentioned first issue. The root cause is that when calculating anything in between the open space and the current position in the same row or column, it included the the current position, which would always be already be occupied and therefore leads to no available places (i.e the range function is wrong). This passed the overall udacity test only because the boardis 3 * 2 and therefore the diagonal error (the above mentioned second issue) is hidden.  
+
+```
+def get_legal_moves(self):
+        list_to_return = []
+        current_player_location = self._player_locations[0] if self._parity == 0 else self._player_locations[1]
+        
+        if current_player_location is None:
+	        for i, cells in enumerate(self._board):
+	            for j, cell in enumerate(cells):
+	            	if self._board[i][j] == 0:
+	            		list_to_return.append((i, j))
+	        return list_to_return
+	        
+        for i, cells in enumerate(self._board):
+            for j, cell in enumerate(cells):
+                if self._board[i][j] == 0 and not (i == current_player_location[0] and j == current_player_location[1]):
+                    # check same column,  
+                    if i == current_player_location[0]:
+                        the_range = range(j + 1, current_player_location[1]) if j < current_player_location[1] else range(current_player_location[1] + 1, j)
+                        if not any(self._board[i][k] == 1 for k in the_range):  
+                            list_to_return.append((i, j))
+                    # check same row   
+                    elif j == current_player_location[1]: 
+                        the_range = range(i + 1, current_player_location[0]) if i < current_player_location[0] else range(current_player_location[0] + 1, i)
+                        if not any(self._board[k][j] == 1 for k in the_range):
+                            list_to_return.append((i, j))
+                    # check diagonal
+                    elif ((i == current_player_location[0] - 1 and j == current_player_location[1] - 1)
+                        or (i == current_player_location[0] - 1 and j == current_player_location[1] + 1)
+                        or (i == current_player_location[0] + 1 and j == current_player_location[1] - 1)
+                        or (i == current_player_location[0] + 1 and j == current_player_location[1] + 1)):
+                            list_to_return.append((i, j))
+       
+        return list_to_return
+```
+
+## Final solution:
+
