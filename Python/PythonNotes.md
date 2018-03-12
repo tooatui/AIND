@@ -79,3 +79,24 @@ Output:
 ('Difference :', set([8, 0, 6]))
 ('Symmetric difference :', set([0, 1, 3, 5, 6, 8]))
 ```
+
+# min
+n,box_min_pos = min((len(values[s]), s) for s in boxes if len(values[s]) > 1)
+ https://classroom.udacity.com/nanodegrees/nd889/parts/6be67fd1-9725-4d14-b36e-ae2b5b20804c/modules/237a9d0d-e2d0-45e4-a7fd-ff4bb88203c5/lessons/b1553784-de43-42c1-a7bf-c66a6e235c47/concepts/d54e395d-8918-44ec-bae7-5e261f51fc9b
+
+# python can do multiple logic operation in one statement
+`if 0 <= _x + dx < xlim`
+
+# tuple operation
+```
+t = (0 ,1)
+x, y = t
+print (x, y)
+# 0 1
+```
+# Others
+```
+xlim = 3
+ylim = 2
+_board = [[0] * ylim for _ in range(xlim)]
+```
