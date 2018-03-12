@@ -17,14 +17,11 @@ def min_value(gameState):
     if(terminal_test(gameState)):
     	return 1
 
-    possible_moves = gameState.get_legal_moves()
+    v = float("inf")
 
-    utilities = []
-    for move in possible_moves:
-    	new_game_state = gameState.forecast_move(move)
-    	utilities.append(max_value(new_game_state))
-
-    return min(utilities)
+    for move in gameState.get_legal_moves():
+    	v = min(v, max_value(gameState.forecast_move(move)))
+    return v
 
 
 def max_value(gameState):
@@ -35,11 +32,8 @@ def max_value(gameState):
     if(terminal_test(gameState)):
     	return -1
 
-    possible_moves = gameState.get_legal_moves()
+    v = float("-inf")
 
-    utilities = []
-    for move in possible_moves:
-    	new_game_state = gameState.forecast_move(move)
-    	utilities.append(min_value(new_game_state))
-
-    return max(utilities)
+    for move in gameState.get_legal_moves():
+    	v = max(v, min_value(gameState.forecast_move(move)))
+    return v
