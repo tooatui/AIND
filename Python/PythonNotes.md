@@ -94,6 +94,15 @@ x, y = t
 print (x, y)
 # 0 1
 ```
+
+# lambda function
+https://classroom.udacity.com/nanodegrees/nd889/parts/6be67fd1-9725-4d14-b36e-ae2b5b20804c/modules/f719d723-7ee0-472c-80c1-663f02de94f3/lessons/9b1a742a-fa2d-4940-922c-ed426b44f81b/concepts/891af51b-052a-48f2-9a75-d9e5bfb64bf5
+```
+def minimax_decision(gameState):
+    # The built in `max()` function can be used as argmax!
+    return max(gameState.get_legal_moves(),
+               key=lambda m: min_value(gameState.forecast_move(m)))
+```
 # Others
 ```
 xlim = 3
