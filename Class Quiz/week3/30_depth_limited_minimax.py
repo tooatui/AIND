@@ -38,7 +38,7 @@ def min_value(gameState, depth):
     # TODO: add a new conditional test to cut off search
     #       when the depth parameter reaches 0 -- for now
     #       just return a value of 0 at the depth limit
-    if depth == 0:
+    if depth <= 0:  # "==" could be used, but "<=" is safer 
     	return 0
 
     v = float("inf")
@@ -61,7 +61,7 @@ def max_value(gameState, depth):
     # TODO: add a new conditional test to cut off search
     #       when the depth parameter reaches 0 -- for now
     #       just return a value of 0 at the depth limit
-    if depth == 0:
+    if depth <= 0:  # "==" could be used, but "<=" is safer 
     	return 0
 
     v = float("-inf")
