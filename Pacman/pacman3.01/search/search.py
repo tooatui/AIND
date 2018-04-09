@@ -145,25 +145,25 @@ def breadthFirstSearch(problem):
         current_state = current_node[0]
         current_actions = current_node[1]
 
-        print("current_state:", current_state)
-        print("current_actions:", current_actions)
-        print("current_cost:", current_node[2])
+        # print("current_state:", current_state)
+        # print("current_actions:", current_actions)
+        # print("current_cost:", current_node[2])
 
         # test if it is goal
         if problem.isGoalState(current_state):
             return current_actions
 
-        successors = problem.getSuccessors(current_state)
-
-        for successor in successors:
-            if successor[0] not in explored_states: 
+        frontiers_states = list(node[0] for node in frontiers.list)
+        for successor in problem.getSuccessors(current_state):
+            successor_state = successor[0]
+            if successor_state not in explored_states and successor_state not in frontiers_states: 
                 actions = list(current_actions)
                 actions.append(successor[1])
                 cost = current_node[2] + successor[2]
-                updated_successor = (successor[0], actions, cost)
+                updated_successor = (successor_state, actions, cost)
 
                 frontiers.push(updated_successor)
-
+        
         explored_states.append(current_state)
 
     # solution not found
