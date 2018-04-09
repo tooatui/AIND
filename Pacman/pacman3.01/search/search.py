@@ -87,7 +87,47 @@ def depthFirstSearch(problem):
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # print("Start:", problem.getStartState())
+    # print("goal", problem.goal)
+    # print ("Is the start a goal?", problem.isGoalState(problem.getStartState()))
+    # print ("Start's successors:", problem.getSuccessors(problem.getStartState()))
+
+    # initialize
+    explored_states = []
+    frontiers = util.Stack()
+
+    start_node = (problem.getStartState(), [], 0)
+    frontiers.push(start_node)
+
+    while not frontiers.isEmpty():
+        current_node = frontiers.pop()
+
+        current_state = current_node[0]
+        current_actions = current_node[1]
+
+        print("current_state:", current_state)
+        print("current_actions:", current_actions)
+        print("current_cost:", current_node[2])
+
+        # test if it is goal
+        if problem.isGoalState(current_state):
+            return current_actions
+
+        successors = problem.getSuccessors(current_state)
+
+        for successor in successors:
+            if successor[0] not in explored_states: 
+                actions = list(current_actions)
+                actions.append(successor[1])
+                cost = current_node[2] + successor[2]
+                updated_successor = (successor[0], actions, cost)
+
+                frontiers.push(updated_successor)
+
+        explored_states.append(current_state)
+
+    # solution not found
+    raise Exception('No path found!') 
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
