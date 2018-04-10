@@ -171,8 +171,7 @@ def breadthFirstSearch(problem):
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
-    "*** YOUR CODE HERE ***"
-   # initialize
+    # initialize
     explored_states = []
     frontiers = util.PriorityQueue()
 
@@ -221,8 +220,47 @@ def nullHeuristic(state, problem=None):
 
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # initialize
+    explored_states = []
+    frontiers = util.PriorityQueue()
+    
+    start_node = (problem.getStartState(), [], 0)
+    priority = start_node[2] + heuristic(problem.getStartState(), problem)
+    frontiers.update(start_node, priority)
+
+    while not frontiers.isEmpty():
+        current_node = frontiers.pop()
+        current_state = current_node[0]
+        current_actions = current_node[1]
+
+        # print("current_state:", current_state)
+        # print("current_actions:", current_actions)
+        # print("current_cost:", current_node[2])
+
+        # you can add it to the frontier multiple times, but you shouldn't expand it more than once.
+        if current_state not in explored_states:
+            # test if it is goal
+            if problem.isGoalState(current_state):
+                return current_actions
+
+            # is there any better way to find if the node is already in frontiers (hard to do in PriorityQueue)?
+            # yes, check if the current node has alreay been explored (i.e. expanded)
+            # see the condition above: if current_state not in explored_states:
+            for successor in problem.getSuccessors(current_state):
+                successor_state = successor[0]
+                if successor_state not in explored_states:
+                    actions = list(current_actions)
+                    actions.append(successor[1])
+                    cost = (current_node[2] + successor[2]) 
+                    priority = cost + heuristic(successor_state, problem)
+                    updated_successor = (successor_state, actions, cost)
+
+                    frontiers.update(updated_successor, priority)
+            
+            explored_states.append(current_state)
+
+    # solution not found
+    raise Exception('No path found!') 
 
 
 # Abbreviations
