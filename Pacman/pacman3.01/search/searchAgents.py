@@ -287,22 +287,20 @@ class CornersProblem(search.SearchProblem):
         self._expanded = 0 # DO NOT CHANGE; Number of search nodes expanded
         # Please add any code here which you would like to use
         # in initializing the problem
-        "*** YOUR CODE HERE ***"
 
     def getStartState(self):
         """
         Returns the start state (in your state space, not the full Pacman state
         space)
         """
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        corners_visited = []
+        return (self.startingPosition, corners_visited)
 
     def isGoalState(self, state):
         """
         Returns whether this search state is a goal state of the problem.
         """
-        "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        return all(corner in state[1] for corner in self.corners)
 
     def getSuccessors(self, state):
         """
@@ -325,8 +323,39 @@ class CornersProblem(search.SearchProblem):
             #   hitsWall = self.walls[nextx][nexty]
 
             "*** YOUR CODE HERE ***"
+            x,y = state[0]
+            dx, dy = Actions.directionToVector(action)
+            nextx, nexty = int(x + dx), int(y + dy)
+            if not self.walls[nextx][nexty]:
+                visited_corners = list(state[1])
+                if (nextx, nexty) in self.corners and (nextx, nexty) not in visited_corners:
+                    visited_corners.append((nextx, nexty))
+
+                nextState = ((nextx, nexty), visited_corners)
+                cost = 1
+                successors.append( ( nextState, action, cost) )
+
+                # this is my initial attempt, using path as the state, but turns out to complex to complete the search
+                # not sure why it is differnt from (state, [visited_corners_list])
+                # maybe the former just has too many combinations of possible states
+                # adding_sucessor = False
+                # nextState = list(state)
+
+                # # Do not allow repeated moves
+                # # if next move already exist, the current move should not have appeared before it
+                # if (nextx, nexty) not in nextState:
+                #     adding_sucessor = True
+                # else:
+                #     next_move_index = nextState.index((nextx, nexty))
+                #     # next_move_index must > 0 because it cannot be the start position
+                #     if nextState[next_move_index - 1] != (x, y):
+                #        adding_sucessor = True
+                # if adding_sucessor:
+                #     nextState.append((nextx, nexty))
+                #     successors.append( ( nextState, action, 1) )
 
         self._expanded += 1 # DO NOT CHANGE
+        print(state)
         return successors
 
     def getCostOfActions(self, actions):
